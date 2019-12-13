@@ -11,6 +11,7 @@
 			Movie Cruiser
 			<img src="images/logo.jpg" alt="logo">
 		</a>
+		<a href="home.html" class="customer-logout-link">Logout</a>
 		<a href="ShowFavorites" class="favorites-link">Favorites</a>
 		<a href="ShowMovieListCustomer" class="customer-movies-link">Movies</a>
 	</p>

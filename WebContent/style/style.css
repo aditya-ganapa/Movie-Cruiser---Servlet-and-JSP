@@ -27,7 +27,7 @@ h1, section h2 {
 	margin-left: 60px;
 }
 
-.admin-movies-link, .customer-movies-link, .favorites-link {
+.admin-movies-link, .customer-movies-link, .favorites-link, .customer-logout-link, .admin-logout-link {
 	color: #ffffff;
 	font-size: 16px;
 	float: right;
@@ -35,7 +35,7 @@ h1, section h2 {
 	padding-right: 10%;
 }
 
-.customer-movies-link {
+.customer-movies-link, .favorites-link, .admin-movies-link {
 	padding-right: 60px;
 }
 

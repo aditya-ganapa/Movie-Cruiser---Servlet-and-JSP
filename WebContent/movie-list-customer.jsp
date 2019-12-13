@@ -1,3 +1,5 @@
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,13 +13,12 @@
 			Movie Cruiser
 			<img src="images/logo.jpg" alt="logo">
 		</a>
-		<a href="ShowFavorites" class="favorites-link">Favorites</a>
+		<a href="home.html" class="customer-logout-link">Logout</a>
+		<a href="ShowFavorites" class="favorites-link">Favorites<c:if test="${favoritesNotEmpty}">[${favoritesSize}]</c:if></a>
 		<a href="ShowMovieListCustomer" class="customer-movies-link">Movies</a>
 	</p>
 </nav>
 <section>
-	<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-	<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 	<h2>Movies</h2>
 	<c:if test="${addFavoritesStatus}">
 		<p class="notification">${addedFavoritesMovieName} added to favorites successfully.</p>

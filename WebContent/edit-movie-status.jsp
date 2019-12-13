@@ -12,6 +12,7 @@
 			Movie Cruiser
 			<img src="images/logo.jpg" alt="logo">
 		</a>
+		<a href="home.html" class="admin-logout-link">Logout</a>
 		<a href="ShowMovieListAdmin" class="admin-movies-link">Movies</a>
 	</p>
 </nav>

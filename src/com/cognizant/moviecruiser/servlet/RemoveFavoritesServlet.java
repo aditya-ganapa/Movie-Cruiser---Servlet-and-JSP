@@ -22,6 +22,13 @@ public class RemoveFavoritesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		MovieDao movieDao = null;
+		try {
+			movieDao = new MovieDaoCollectionImpl();
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		long movieId = Long.parseLong(request.getParameter("movieId"));
 		FavoritesDao favoritesDao = new FavoritesDaoCollectionImpl();
 		long userId = 1;
@@ -31,17 +38,12 @@ public class RemoveFavoritesServlet extends HttpServlet {
 		try {
 			favorites = favoritesDao.getAllFavoriteMovies(userId);
 		} catch (FavoritesEmptyException e) {
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("favorites-empty.jsp");
+			request.setAttribute("removedFavoritesMovieName", movieDao.getMovie(movieId).getTitle());
+			request.setAttribute("removeLastFavoritesMovieStatus", true);
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("favorites.jsp");
 			requestDispatcher.forward(request, response);
 		}
 		request.setAttribute("favorites", favorites);
-		MovieDao movieDao = null;
-		try {
-			movieDao = new MovieDaoCollectionImpl();
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 		request.setAttribute("removedFavoritesMovieName", movieDao.getMovie(movieId).getTitle());
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("favorites.jsp");
 		try {
