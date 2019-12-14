@@ -22,20 +22,23 @@ public class ShowFavoritesServlet extends HttpServlet {
 		long userId = 1;
 		FavoritesDao favoritesDao = new FavoritesDaoCollectionImpl();
 		Favorites favorites = null;
+		boolean empty = false;
 		try {
 			favorites = favoritesDao.getAllFavoriteMovies(userId);
-		} catch (FavoritesEmptyException e) {
+		} catch (FavoritesEmptyException | NullPointerException e) {
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("favorites-empty.jsp");
 			requestDispatcher.forward(request, response);
-		} catch (NullPointerException e) {
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("favorites-empty.jsp");
-			requestDispatcher.forward(request, response);
+			empty = true;
 		}
-		request.setAttribute("favorites", favorites);
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("favorites.jsp");
-		try {
+		if(!empty) {
+			request.setAttribute("favorites", favorites);
+			request.setAttribute("favoritesNotEmpty", true);
+			request.setAttribute("favoritesSize", favorites.getMovieList().size());
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("favorites.jsp");
+	//	try {
 			requestDispatcher.forward(request, response);
-		} catch (IllegalStateException e) {
+	//	} catch (IllegalStateException e) {
+	//	}
 		}
 	}
 }

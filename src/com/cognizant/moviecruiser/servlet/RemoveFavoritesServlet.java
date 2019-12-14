@@ -35,6 +35,7 @@ public class RemoveFavoritesServlet extends HttpServlet {
 		favoritesDao.removeFavoriteMovie(userId, movieId);
 		request.setAttribute("removeFavoritesMovieStatus", true);
 		Favorites favorites = null;
+		boolean empty = false;
 		try {
 			favorites = favoritesDao.getAllFavoriteMovies(userId);
 		} catch (FavoritesEmptyException e) {
@@ -42,13 +43,18 @@ public class RemoveFavoritesServlet extends HttpServlet {
 			request.setAttribute("removeLastFavoritesMovieStatus", true);
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("favorites.jsp");
 			requestDispatcher.forward(request, response);
+			empty = true;
 		}
-		request.setAttribute("favorites", favorites);
-		request.setAttribute("removedFavoritesMovieName", movieDao.getMovie(movieId).getTitle());
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("favorites.jsp");
-		try {
+		if (!empty) {
+			request.setAttribute("favorites", favorites);
+			request.setAttribute("removedFavoritesMovieName", movieDao.getMovie(movieId).getTitle());
+			request.setAttribute("favoritesNotEmpty", true);
+			request.setAttribute("favoritesSize", favorites.getMovieList().size());
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("favorites.jsp");
+	//	try {
 			requestDispatcher.forward(request, response);
-		} catch (IllegalStateException e) {
+	//	} catch (IllegalStateException e) {
+	//	}
 		}
 	}
 }
