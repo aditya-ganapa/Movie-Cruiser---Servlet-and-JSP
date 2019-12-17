@@ -29,11 +29,11 @@ public class MovieDaoCollectionImpl implements MovieDao {
 
 	@Override
 	public List<Movie> getMovieListCustomer() {
-		List<Movie> arrayList = new ArrayList<>();
+		List<Movie> movieListCustomer = new ArrayList<>();
 		for (Movie movie : movieList)
 			if ((movie.getDateOfLaunch().compareTo(new Date()) <= 0) && movie.isActive())
-				arrayList.add(movie);
-		return arrayList;
+				movieListCustomer.add(movie);
+		return movieListCustomer;
 	}
 
 	@Override

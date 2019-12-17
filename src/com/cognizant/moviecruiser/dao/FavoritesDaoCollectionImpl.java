@@ -22,7 +22,8 @@ public class FavoritesDaoCollectionImpl implements FavoritesDao {
 		Movie movie = movieDao.getMovie(movieId);
 		if (userFavorites.containsKey(userId)) {
 			List<Movie> movieList = userFavorites.get(userId).getMovieList();
-			movieList.add(movie);
+			if (!movieList.contains(movie))
+				movieList.add(movie);
 		}
 		else {
 			Favorites favorites = new Favorites();

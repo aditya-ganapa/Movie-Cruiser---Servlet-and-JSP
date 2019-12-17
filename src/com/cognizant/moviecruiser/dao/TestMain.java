@@ -107,7 +107,7 @@ public class TestMain {
 						try {
 							System.out.println(favoritesDao.getAllFavoriteMovies(userId1));
 						} catch (Exception e) {
-							System.out.println("\nCart is empty.");
+							System.out.println("\nFavorites is empty.");
 						}
 						break;
 					case 4:
